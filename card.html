@@ -3,11 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>julio siringoringo</title>
+    <title>3D Carousel with Blur</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- <style>
+      :root {
+        --current-card: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #76b852, #8dc26f);
+        margin: 0;
+      }
+
+      .carousel {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        margin: auto;
+      }
+
+      .card-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out;
+      }
+
+      .card {
+        background: white;
+        width: 200px;
+        height: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2em;
+      }
+
+      /* Center card (active) */
+      .card-container[data-state="center"] {
+        transform: translateZ(0) scale(1);
+        filter: blur(0);
+        opacity: 1;
+      }
+
+      /* Left card (inactive, with blur and behind) */
+      .card-container[data-state="left"] {
+        transform: translateX(-150px) translateZ(-200px) scale(0.8);
+        filter: blur(5px);
+        opacity: 0.5;
+      }
+
+      /* Right card (inactive, with blur and behind) */
+      .card-container[data-state="right"] {
+        transform: translateX(150px) translateZ(-200px) scale(0.8);
+        filter: blur(5px);
+        opacity: 0.5;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .button {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin: 0 10px;
+      }
+    </style> -->
   </head>
   <body>
+    <!-- HEADER -->
     <header class="header">
       <a href="#home" class="logo">Julio <span>siringoringo</span></a>
 
@@ -17,10 +103,12 @@
         <a href="#home" class="active">Home</a>
         <a href="#education">Education</a>
         <a href="#services">Skill</a>
-        <a href="#portopolio">Portfolio</a>
+        <a href="#portfolio">Portfolio</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
+    <!-- END HEADER -->
+    <!-- HOME -->
     <section class="home" id="home">
       <div class="home-content">
         <h1>Hi, It's <span>Julio</span></h1>
@@ -44,6 +132,8 @@
         <img src="profil1.jpeg" alt="" />
       </div>
     </section>
+    <!-- END HOME -->
+    <!-- EDUCATION -->
     <section class="education" id="education">
       <h2 class="heading">EDUCATION</h2>
 
@@ -85,6 +175,8 @@
         </div>
       </div>
     </section>
+    <!-- AND EDUCATION -->
+    <!-- SKILL -->
     <section class="services" id="services">
       <h2 class="heading">SKILL</h2>
 
@@ -128,54 +220,29 @@
         </div>
       </div>
     </section>
-
-    <!-- <section class="portopolio" id="portopolio">
-      <div class="portopolio-box">
-        <h2 class="heading">PORTFOLIO</h2>
-
-        <div class="wrapper">
-          <div class="portopolio-item">
-            <img src="profil.jpeg" alt="" />
-            <h2>Projects</h2>
-            <p>I will update these soon.</p>
-            <a href="#">Demo</a>
-          </div>
-
-          <div class="portopolio-item">
-            <img src="profil.jpeg" alt="" />
-            <h2>Projects</h2>
-            <p>I will update these soon.</p>
-            <a href="#">Demo</a>
-          </div>
-
-          <div class="portopolio-item">
-            <img src="profil.jpeg" alt="" />
-            <h2>Projects</h2>
-            <p>I will update these soon.</p>
-            <a href="#">Demo</a>
-          </div>
-        </div>
-      </div>
-    </section> -->
-    <section class="cardcoba">
+    <!-- END SKILL -->
+    <!-- PORTFOLIO -->
+    <section class="cardcoba" id="cartcoba">
       <div class="carousel">
-        <div class="card-container" data-state="center">
-          <div class="card">Kartu 1</div>
+        <div class="card-container" id="card1" data-state="center">
+          <div class="card">Card 1</div>
         </div>
-        <div class="card-container" data-state="right">
-          <div class="card">Kartu 2</div>
+        <div class="card-container" id="card2" data-state="right">
+          <div class="card">Card 2</div>
         </div>
-        <div class="card-container" data-state="left">
-          <div class="card">Kartu 3</div>
+        <div class="card-container" id="card3" data-state="left">
+          <div class="card">Card 3</div>
         </div>
       </div>
 
       <div class="controls">
-        <button class="button" id="prev">Prev</button>
-        <button class="button" id="next">Next</button>
+        <button class="button" onclick="prev()">Prev</button>
+        <button class="button" onclick="next()">Next</button>
       </div>
     </section>
+    <!-- END PORTFOLIO -->
 
+    <!-- CONTAC ME -->
     <section class="contact" id="contact">
       <h2 class="heading">CONTACT <span>ME</span></h2>
       <form action="">
@@ -195,26 +262,30 @@
         </div>
       </form>
     </section>
+    <!-- END CONTAC ME -->
 
+    <!-- FOOTER -->
     <footer class="footer">
-      <p>JULIOSIRINGORINGO</p>
-      <div class="select-menu">
-        <div class="select-btn">
-          <span class="sBtn-text"></span>
-          <i class="bx bx-grid-alt"></i>
+        <p>JULIOSIRINGORINGO</p>
+        <div class="select-menu">
+          <div class="select-btn">
+            <span class="sBtn-text"></span>
+            <i class="bx bx-grid-alt"></i>
+          </div>
+          <ul class="options">
+            <li class="option"><a href="https://github.com/JULIOSIRINGORINGO"><i class="bx bxl-github"></i></a></i>  </li>
+            <li class="option"><a href="https://www.instagram.com/juliosiringoringo?igsh=MWFiM3NtcnpyeTIxeQ=="><i class="bx bxl-instagram"></i></a></i>  </li>
+            <li class="option"><a href="https://www.linkedin.com/in/julio-siringoringo-230390324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bx bxl-linkedin"></i></a></i>  </li>
+            <li class="option"><a href="https://www.facebook.com/share/tcZcYDxLsZWcEci8/?mibextid=qi2Omg"><i class="bx bxl-facebook"></i></a></i>  </li>
+            <li class="option"><a href="#home">FAQ</a></i>  </li>
+            <li class="option"><a href="#portopolio">PORT</a></i>  </li>
+          </ul>
         </div>
-        <ul class="options">
-          <li class="option"><a href="https://github.com/JULIOSIRINGORINGO"><i class="bx bxl-github"></i></a></i>  </li>
-          <li class="option"><a href="https://www.instagram.com/juliosiringoringo?igsh=MWFiM3NtcnpyeTIxeQ=="><i class="bx bxl-instagram"></i></a></i>  </li>
-          <li class="option"><a href="https://www.linkedin.com/in/julio-siringoringo-230390324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bx bxl-linkedin"></i></a></i>  </li>
-          <li class="option"><a href="https://www.facebook.com/share/tcZcYDxLsZWcEci8/?mibextid=qi2Omg"><i class="bx bxl-facebook"></i></a></i>  </li>
-          <li class="option"><a href="#home">FAQ</a></i>  </li>
-          <li class="option"><a href="#portopolio">PORT</a></i>  </li>
-        </ul>
-      </div>
-      <a href="#home"><i class='bx bx-chevron-up'></i></a>
-    </footer>
-
+        <a href="#home"><i class='bx bx-chevron-up'></i></a>
+      </footer>
+  
+     <!-- END FOOTER  -->
     <script src="script.js"></script>
+    <!--  -->
   </body>
 </html>

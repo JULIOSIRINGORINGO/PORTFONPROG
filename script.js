@@ -1,3 +1,31 @@
+let currentCard = 0;
+const totalCards = 3;
+const cards = document.querySelectorAll(".card-container");
+
+function updateCarousel() {
+  cards.forEach((card, index) => {
+    let state = "";
+    if (index === currentCard) {
+      state = "center"; // Card in the center (active)
+    } else if (index === (currentCard + 1) % totalCards) {
+      state = "right"; // Card to the right (inactive, blurred)
+    } else {
+      state = "left"; // Card to the left (inactive, blurred)
+    }
+    card.setAttribute("data-state", state);
+  });
+}
+
+function prev() {
+  currentCard = (currentCard - 1 + totalCards) % totalCards;
+  updateCarousel();
+}
+
+function next() {
+  currentCard = (currentCard + 1) % totalCards;
+  updateCarousel();
+}
+
 const menuIcon = document.querySelector("#menu-icon");
 const navbar = document.querySelector(".navbar");
 const sections = document.querySelectorAll("section");
